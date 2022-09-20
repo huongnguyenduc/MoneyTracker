@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:local="clr-namespace:MoneyTracker;assembly=MoneyTracker"
+             xmlns:converter ="clr-namespace:MoneyTracker.Convertors"
+             x:Class="MoneyTracker.Views.AddAccountPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:CurrencyConverter x:Key="currencyConvertor"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <FlexLayout Direction="Column" JustifyContent="SpaceBetween" Padding="32,56,32,24">
+            <StackLayout Spacing="6">
+                <Label Text="First, create a wallet"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"
+                       TextColor="{AppThemeBinding Light={StaticResource AccentDarkPurple}, Dark={StaticResource AccentYellow}}" />
+                <Label Text="Money Tracker helps you to keep track of spending money from wallets. Each wallet represents a source of money such as Cash or a Bank Account"
+                       FontSize="13" 
+                       HorizontalTextAlignment="Center"
+                       Opacity="0.6"
+                       LineHeight="1.4"
+                       TextColor="{AppThemeBinding Light={StaticResource AccentDarkPurple}, Dark={StaticResource AccentYellow}}" />
+            </StackLayout>
+            <Grid RowDefinitions="80,80">
+                
+            <Grid RowDefinitions="15,50" Grid.Row="0">
+                <Label Text="Wallet Name" FontSize="12" Grid.Row="0" />
+                <Entry x:Name="accountName" 
+                       Grid.Row="1"
+                       Placeholder="Cash" 
+                       VerticalOptions="Center" 
+                       FontAttributes="Bold"
+                       Text="{Binding Name}"/>
+          
+            </Grid>
+            <Grid RowDefinitions="15,50" Grid.Row="1">
+                <Label Text="Balance" FontSize="12" Grid.Row="0" />
+                    <Entry x:Name="accountBalance" 
+                       Grid.Row="1"
+                       Placeholder="Enter your current balance"
+                       VerticalOptions="Center" 
+                       Keyboard="Numeric" 
+                       FontAttributes="Bold"
+                       Text="{Binding InitialBalance, Converter={StaticResource currencyConvertor}}">
+                        <Entry.Triggers>
+                            <EventTrigger Event="TextChanged">
+                                <local:NumericTriggerAction />
+                            </EventTrigger>
+                        </Entry.Triggers>
+                    </Entry>
+                </Grid>
+            </Grid>
+            <Button Text="Create Wallet" Style="{StaticResource MainButtonUnChecked}" Clicked="Button_Clicked" VerticalOptions="EndAndExpand"/>
+            </FlexLayout>
+    </ContentPage.Content>
+</ContentPage>
