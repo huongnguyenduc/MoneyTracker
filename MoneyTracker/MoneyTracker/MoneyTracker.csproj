@@ -18,6 +18,8 @@
     <None Remove="Img\personal_finance.svg" />
     <None Remove="Img\personal_finance_light.svg" />
     <None Remove="Img\shopping_bag.svg" />
+	<None Remove="Img\add_circle.svg" />
+	<None Remove="Img\setting.svg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +29,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="1.2.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
@@ -39,6 +42,8 @@
     <SharedImage Include="Img\personal_finance.svg" BaseSize="320, 320" />
     <SharedImage Include="Img\personal_finance_light.svg" BaseSize="320, 320" />
     <SharedImage Include="Img\shopping_bag.svg" BaseSize="35, 35" />
+	<SharedImage Include="Img\add_circle.svg" BaseSize="32, 32" />
+	<SharedImage Include="Img\setting.svg" BaseSize="24, 24" />
   </ItemGroup>
 
   <ItemGroup>

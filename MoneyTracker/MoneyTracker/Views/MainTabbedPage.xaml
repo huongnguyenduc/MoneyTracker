@@ -7,6 +7,8 @@
             android:TabbedPage.IsSwipePagingEnabled="False"
             NavigationPage.HasNavigationBar="False"
             xmlns:view="clr-namespace:MoneyTracker.Views"
+            UnselectedTabColor="{AppThemeBinding Light={StaticResource AccentLiteGreen}, Dark={StaticResource BackgroundLight}}"
+            SelectedTabColor="{AppThemeBinding Light={StaticResource AccentDarkGreen}, Dark={StaticResource AccentYellow}}"
             BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundLight}, Dark={StaticResource BackgroundDark}}">
 
     <NavigationPage Title="Bill"  IconImageSource="shopping_bag.png" >
@@ -21,9 +23,21 @@
         </x:Arguments>
     </NavigationPage>
 
+    <NavigationPage Title="Add Transaction" IconImageSource="add_circle.png" >
+        <x:Arguments>
+            <view:AddTransactionPage/>
+        </x:Arguments>
+    </NavigationPage>
+
     <NavigationPage Title="Cards" IconImageSource="dollar_sign.png" >
         <x:Arguments>
             <view:AccountsPage/>
+        </x:Arguments>
+    </NavigationPage>
+    
+    <NavigationPage Title="Settings" IconImageSource="setting.png" >
+        <x:Arguments>
+            <view:SettingsPage/>
         </x:Arguments>
     </NavigationPage>
 </TabbedPage>

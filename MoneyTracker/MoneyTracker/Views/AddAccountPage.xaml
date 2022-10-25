@@ -2,14 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              NavigationPage.HasNavigationBar="False"
-             xmlns:local="clr-namespace:MoneyTracker;assembly=MoneyTracker"
-             xmlns:converter ="clr-namespace:MoneyTracker.Convertors"
+             xmlns:vm="clr-namespace:MoneyTracker.ViewModels"
              x:Class="MoneyTracker.Views.AddAccountPage">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converter:CurrencyConverter x:Key="currencyConvertor"/>
-        </ResourceDictionary>
-    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <vm:AddAccountViewModel />
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <FlexLayout Direction="Column" JustifyContent="SpaceBetween" Padding="32,56,32,24">
             <StackLayout Spacing="6">
@@ -27,34 +24,31 @@
             </StackLayout>
             <Grid RowDefinitions="80,80">
                 
-            <Grid RowDefinitions="15,50" Grid.Row="0">
-                <Label Text="Wallet Name" FontSize="12" Grid.Row="0" />
-                <Entry x:Name="accountName" 
-                       Grid.Row="1"
-                       Placeholder="Cash" 
-                       VerticalOptions="Center" 
-                       FontAttributes="Bold"
-                       Text="{Binding Name}"/>
+                <Grid RowDefinitions="15,50" Grid.Row="0">
+                    <Label Text="Wallet Name" FontSize="12" Grid.Row="0" />
+                    <Entry x:Name="accountName" 
+                           Grid.Row="1"
+                           Placeholder="Cash" 
+                           VerticalOptions="Center" 
+                           FontAttributes="Bold"
+                           Text="{Binding Name}"/>
           
-            </Grid>
-            <Grid RowDefinitions="15,50" Grid.Row="1">
-                <Label Text="Balance" FontSize="12" Grid.Row="0" />
-                    <Entry x:Name="accountBalance" 
-                       Grid.Row="1"
-                       Placeholder="Enter your current balance"
-                       VerticalOptions="Center" 
-                       Keyboard="Numeric" 
-                       FontAttributes="Bold"
-                       Text="{Binding InitialBalance, Converter={StaticResource currencyConvertor}}">
-                        <Entry.Triggers>
-                            <EventTrigger Event="TextChanged">
-                                <local:NumericTriggerAction />
-                            </EventTrigger>
-                        </Entry.Triggers>
-                    </Entry>
+                </Grid>
+                <Grid RowDefinitions="15,50" Grid.Row="1">
+                    <Label Text="Balance" FontSize="12" Grid.Row="0" />
+                    <FlexLayout Grid.Row="1" AlignItems="Center">
+                        <Entry x:Name="accountBalance" 
+                            Placeholder="Enter your current balance"
+                            Keyboard="Numeric" 
+                            FlexLayout.Grow="1"
+                            FontAttributes="Bold"
+                            Text="{Binding InitialBalance, StringFormat='{0:N0}'}">
+                        </Entry>
+                        <Label  Text="{Binding CurrencySymbol}" FontAttributes="Bold" FontSize="Medium" Margin="8,0,0,0" />
+                    </FlexLayout>
                 </Grid>
             </Grid>
-            <Button Text="Create Wallet" Style="{StaticResource MainButtonUnChecked}" Clicked="Button_Clicked" VerticalOptions="EndAndExpand"/>
+            <Button Text="Create Wallet" Style="{StaticResource MainButtonUnChecked}" Command="{Binding AddWalletCommand}" VerticalOptions="EndAndExpand"/>
             </FlexLayout>
     </ContentPage.Content>
 </ContentPage>
